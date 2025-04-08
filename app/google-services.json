@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822120030424",
+    "project_id": "agrimart-mobile-app",
+    "storage_bucket": "agrimart-mobile-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822120030424:android:eac6b96a393e593a57b7ad",
+        "android_client_info": {
+          "package_name": "com.example.agrimart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7Cb8mWpWdBk0aN0feKRUUKN6vccHDupc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

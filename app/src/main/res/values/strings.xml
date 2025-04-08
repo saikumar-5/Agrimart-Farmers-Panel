@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Agrimart</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="onboarding1_desc">Connecting Farmers Directly to Customers – Fresh, Organic, and Locally Sourced Produce Delivered Straight from the Fields to Your Doorstep!</string>
+    <string name="onboarding2_desc">Empowering Farmers with a Digital Marketplace – Sell Fresh Produce Directly to Customers, Maximize Profits, and Grow Your Agricultural Business Online!</string>
+    <string name="onboarding3_desc">Ensuring Freshness and Purity – Rigorous Quality Checks on Every Product to Deliver Safe, Organic, and Farm-Fresh Goods to Customers.</string>
+    <string name="onboarding4_desc">Ensuring Freshness and Purity – Rigorous Quality Checks on Every Product to Deliver Safe, Organic, and Farm-Fresh Goods to Customers.</string>
+    <string name="onboarding5_desc">Ensuring Freshness and Purity – Rigorous Quality Checks on Every Product to Deliver Safe, Organic, and Farm-Fresh Goods to Customers.</string>
+    <string name="onboarding1_heading">Farmers To Doorstep</string>
+    <string name="onboarding2_heading">Digital Platform</string>
+    <string name="onboarding3_heading">Quality Control of Products</string>
+    <string name="onboarding4_heading">Fast Delivery, Fresh from Farmers</string>
+    <string name="onboarding5_heading">Fast Delivery, Fresh from Farmers</string>
+    <string name="default_web_client_id">822120030424-g5lufqcdjq1ko79p4kseu2uvbdo2h6lu.apps.googleusercontent.com</string>
+</resources>
