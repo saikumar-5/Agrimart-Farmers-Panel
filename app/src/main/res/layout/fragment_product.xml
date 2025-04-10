@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="40dp"
     android:background="#FFCCCC"
     tools:context=".ProductFragment">
 
@@ -62,10 +63,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/rounded_button_bg"
-            android:text="List your products"
+            android:text="List your product"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button_bg"
+            android:backgroundTint="@null"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

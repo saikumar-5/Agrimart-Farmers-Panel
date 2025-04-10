@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.farmer_dash);
+        setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -42,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
             if (item.getItemId() == R.id.nav_home) {
                 selectedFragment = new HomeFragment();
-            } else if (item.getItemId() == R.id.nav_products) {
+            } else if (item.getItemId() == R.id.nav_wishlist) {   // analytics
                 selectedFragment = new ProductFragment();
             } else if (item.getItemId() == R.id.nav_profile) {
                 selectedFragment = new ProfileFragment();
-            } else if (item.getItemId() == R.id.nav_cart) {
+            } else if (item.getItemId() == R.id.nav_cart) {       // orders
                 selectedFragment = new CartFragment();
-            } else if (item.getItemId() == R.id.nav_wishlist) {
+            } else if (item.getItemId() == R.id.nav_products) {   // productsadd
                 selectedFragment = new WishlistFragment();
             }
 

@@ -1,6 +1,6 @@
 package com.example.agrimart;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,35 +8,49 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private List<com.example.agrimart.Product> productList;
-    private Context context;
+    private List<Product> productList;
+    private OnProductClickListener listener; // 👈 add a listener
 
-    public ProductAdapter(Context context, List<com.example.agrimart.Product> productList) {
-        this.context = context;
+    public interface OnProductClickListener {
+        void onProductClick(Product product);
+    }
+
+    public ProductAdapter(List<Product> productList, OnProductClickListener listener) {
         this.productList = productList;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.product_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
         return new ProductViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        com.example.agrimart.Product product = productList.get(position);
-        holder.tvProductName.setText(product.getName());
-        holder.tvProductQuantity.setText(product.getQuantity());
-        holder.tvProductPrice.setText(product.getPrice());
-        // Set image using your preferred image loading library
-        // Glide.with(context).load(product.getImageUrl()).into(holder.ivProductImage);
+        Product product = productList.get(position);
+
+        holder.name.setText(product.getName());
+        holder.weight.setText(product.getQuantity());
+        holder.price.setText(product.getPrice());
+        holder.image.setImageResource(product.getImageResId());
+
+        // 🔥 handle click
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                Log.d("ProductAdapter", "Product clicked: " + product.getName());
+                listener.onProductClick(product);
+            }
+        });
+
     }
 
     @Override
@@ -44,17 +58,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productList.size();
     }
 
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivProductImage, ivMore;
-        TextView tvProductName, tvProductQuantity, tvProductPrice;
+    static class ProductViewHolder extends RecyclerView.ViewHolder {
+
+        TextView name, weight, price;
+        ImageView image;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivProductImage = itemView.findViewById(R.id.ivProductImage);
-            ivMore = itemView.findViewById(R.id.ivMore);
-            tvProductName = itemView.findViewById(R.id.tvProductName);
-            tvProductQuantity = itemView.findViewById(R.id.tvProductQuantity);
-            tvProductPrice = itemView.findViewById(R.id.tvProductPrice);
+            name = itemView.findViewById(R.id.tvProductName);
+            weight = itemView.findViewById(R.id.tvProductQuantity);
+            price = itemView.findViewById(R.id.tvProductPrice);
+            image = itemView.findViewById(R.id.ivProductImage);
         }
     }
 }
