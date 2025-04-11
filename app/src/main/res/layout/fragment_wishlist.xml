@@ -15,8 +15,8 @@
 
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/arrow_back_24dp_000000"
             android:contentDescription="Back"
@@ -278,57 +278,58 @@
 
             <!-- Weekly Sales Trend Graph Placeholder -->
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="200dp"
-                android:src="@drawable/your_chart_placeholder"
+                android:layout_gravity="center"
+                android:src="@drawable/weekgraph"
                 android:scaleType="fitCenter"
                 android:background="@android:color/darker_gray"
                 android:layout_marginBottom="16dp"/>
 
             <!-- Most Sold Product Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="@android:color/white"
-                android:elevation="4dp"
-                android:padding="16dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:gravity="center"-->
+<!--                android:background="@android:color/white"-->
+<!--                android:elevation="4dp"-->
+<!--                android:padding="16dp">-->
 
-                <TextView
-                    android:text="Most Sold Product 🏆"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_marginBottom="8dp" />
+<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="Most Sold Product 🏆"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="18sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textStyle="bold"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textColor="@android:color/black"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginBottom="8dp" />&ndash;&gt;-->
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/your_tomato_image"
-                    android:layout_marginBottom="8dp"/>
+<!--&lt;!&ndash;                <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_width="80dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_height="80dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:src="@drawable/your_tomato_image"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginBottom="8dp"/>&ndash;&gt;-->
 
-                <TextView
-                    android:text="Tomatoes"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_marginBottom="4dp"/>
+<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="Tomatoes"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="16sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textStyle="bold"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textColor="@android:color/black"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginBottom="4dp"/>&ndash;&gt;-->
 
-                <TextView
-                    android:text="57% of Total Sales"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="2dp"/>
+<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="57% of Total Sales"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="14sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginBottom="2dp"/>&ndash;&gt;-->
 
-                <TextView
-                    android:text="125 Kg Sold"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="2dp"/>
+<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="125 Kg Sold"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="14sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginBottom="2dp"/>&ndash;&gt;-->
 
-                <TextView
-                    android:text="₹38,500 Earned"
-                    android:textSize="14sp"/>
-            </LinearLayout>
+<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="₹38,500 Earned"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="14sp"/>&ndash;&gt;-->
+<!--            </LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 
