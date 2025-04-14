@@ -51,10 +51,12 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.cardview)
     implementation(libs.play.services.analytics.impl)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.gridlayout:gridlayout:1.0.0")
+
 
 
 }

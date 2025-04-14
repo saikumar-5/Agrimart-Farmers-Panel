@@ -1,6 +1,5 @@
 package com.example.agrimart;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,21 +7,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private List<Product> productList;
-    private OnProductClickListener listener; // 👈 add a listener
+    private List<AgricultureProduct> productList;
+    private OnProductClickListener listener;
 
     public interface OnProductClickListener {
-        void onProductClick(Product product);
+        void onProductClick(AgricultureProduct product);
     }
 
-    public ProductAdapter(List<Product> productList, OnProductClickListener listener) {
+    public ProductAdapter(List<AgricultureProduct> productList, OnProductClickListener listener) {
         this.productList = productList;
         this.listener = listener;
     }
@@ -36,21 +34,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        Product product = productList.get(position);
-
-        holder.name.setText(product.getName());
-        holder.weight.setText(product.getQuantity());
-        holder.price.setText(product.getPrice());
-        holder.image.setImageResource(product.getImageResId());
-
-        // 🔥 handle click
-        holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                Log.d("ProductAdapter", "Product clicked: " + product.getName());
-                listener.onProductClick(product);
-            }
-        });
-
+        AgricultureProduct product = productList.get(position);
+        holder.bind(product, listener);
     }
 
     @Override
@@ -58,17 +43,39 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productList.size();
     }
 
-    static class ProductViewHolder extends RecyclerView.ViewHolder {
+    // Method to add a new product to the list
+    public void addProduct(AgricultureProduct product) {
+        productList.add(product);
+        notifyItemInserted(productList.size() - 1);
+    }
 
-        TextView name, weight, price;
-        ImageView image;
+    static class ProductViewHolder extends RecyclerView.ViewHolder {
+        private ImageView ivProductImage;
+        private TextView tvProductName, tvProductQuantity, tvProductPrice;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.tvProductName);
-            weight = itemView.findViewById(R.id.tvProductQuantity);
-            price = itemView.findViewById(R.id.tvProductPrice);
-            image = itemView.findViewById(R.id.ivProductImage);
+            ivProductImage = itemView.findViewById(R.id.ivProductImage);
+            tvProductName = itemView.findViewById(R.id.tvProductName);
+            tvProductQuantity = itemView.findViewById(R.id.tvProductQuantity);
+            tvProductPrice = itemView.findViewById(R.id.tvProductPrice);
+        }
+
+        public void bind(final AgricultureProduct product, final OnProductClickListener listener) {
+            tvProductName.setText(product.getName());
+            tvProductQuantity.setText(product.getPackagingType() != null ?
+                    product.getPackagingType() : "1 kg");
+            tvProductPrice.setText("₹" + product.getPrice() + "/kg");
+
+            // If we have a valid image URL/resource, set it
+            // Otherwise, use a default image
+            ivProductImage.setImageResource(R.drawable.tomatoes); // Default image for now
+
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onProductClick(product);
+                }
+            });
         }
     }
 }

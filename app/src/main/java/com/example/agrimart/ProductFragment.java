@@ -1,9 +1,12 @@
 package com.example.agrimart;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +19,12 @@ import java.util.List;
 
 public class ProductFragment extends Fragment {
 
+    private static final String TAG = "ProductFragment";
+    private Button btnListProducts;
+    private RecyclerView recyclerView;
+    private ProductAdapter adapter;
+    private List<AgricultureProduct> productList;
+    private FirestoreHelper firestoreHelper;
 
     @Nullable
     @Override
@@ -23,53 +32,158 @@ public class ProductFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.rvProducts);
+        // Initialize RecyclerView
+        recyclerView = view.findViewById(R.id.rvProducts);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Dummy product data
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product("Fresh Tomatoes", "1 kg", "₹40/kg", R.drawable.tomatoes));
-        productList.add(new Product("Organic Tomatoes", "1 kg", "₹60/kg", R.drawable.tomatoes));
-        productList.add(new Product("Red Tomatoes", "1 kg", "₹50/kg", R.drawable.tomatoes));
+        // Initialize Firestore helper
+        firestoreHelper = new FirestoreHelper();
 
-        // Adapter with click listener
-        // When a product is clicked, open ProductDetailsFragment
-        // Replace your existing click handler with this code
-        ProductAdapter adapter = new ProductAdapter(productList, product -> {
-            android.util.Log.d("AgriMart", "Product clicked: " + product.getName());
+        // Initialize product list
+        productList = new ArrayList<>();
 
-            try {
-                // Test if we can create the fragment at all
-                ProductDetailsFragment detailsFragment = new ProductDetailsFragment();
-
-                // Create bundle with the data
-                Bundle bundle = new Bundle();
-                bundle.putString("product_name", product.getName());
-                bundle.putString("product_weight", product.getQuantity());
-                bundle.putString("product_price", product.getPrice());
-                bundle.putInt("product_image", product.getImageResId());
-                detailsFragment.setArguments(bundle);
-
-                // Get the fragment manager and see if it exists
-                android.util.Log.d("AgriMart", "Fragment manager: " +
-                        (requireActivity().getSupportFragmentManager() != null));
-
-                // Try to perform the transaction
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, detailsFragment)
-                        .commit();
-
-                android.util.Log.d("AgriMart", "Transaction attempted");
-            } catch (Exception e) {
-                // Log any exceptions that occur
-                android.util.Log.e("AgriMart", "Error in fragment transaction", e);
-            }
-        });
-
+        // Initialize the adapter
+        adapter = new ProductAdapter(productList, this::navigateToProductDetails);
         recyclerView.setAdapter(adapter);
+
+        // Initialize the "List your product" button
+        btnListProducts = view.findViewById(R.id.btnListProducts);
+
+        // Set click listener for the button
+        setupClickListeners();
+
+        // Load products from Firestore
+        loadProductsFromFirestore();
 
         return view;
     }
-}
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh products when coming back to this fragment
+        loadProductsFromFirestore();
+    }
+
+    private void loadProductsFromFirestore() {
+        firestoreHelper.getAllProducts(new FirestoreHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(List<AgricultureProduct> products) {
+                productList.clear();
+                productList.addAll(products);
+                adapter.notifyDataSetChanged();
+                Log.d(TAG, "Loaded " + products.size() + " products from Firestore");
+            }
+
+            @Override
+            public void DataIsInserted() {
+                // Not used here
+            }
+
+            @Override
+            public void DataIsUpdated() {
+                // Not used here
+            }
+
+            @Override
+            public void DataIsDeleted() {
+                // Not used here
+            }
+
+            @Override
+            public void DataOperationFailed(String message) {
+                Toast.makeText(getContext(), "Failed to load products: " + message, Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Failed to load products: " + message);
+            }
+        });
+
+        // Optional: Set up real-time listener for product changes
+        // setupRealtimeUpdates();
+    }
+
+    private void setupRealtimeUpdates() {
+        firestoreHelper.listenForProductChanges(new FirestoreHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(List<AgricultureProduct> products) {
+                productList.clear();
+                productList.addAll(products);
+                adapter.notifyDataSetChanged();
+                Log.d(TAG, "Real-time update: " + products.size() + " products");
+            }
+
+            @Override
+            public void DataIsInserted() {
+                // Not used here
+            }
+
+            @Override
+            public void DataIsUpdated() {
+                // Not used here
+            }
+
+            @Override
+            public void DataIsDeleted() {
+                // Not used here
+            }
+
+            @Override
+            public void DataOperationFailed(String message) {
+                Log.e(TAG, "Real-time update failed: " + message);
+            }
+        });
+    }
+
+    private void setupClickListeners() {
+        btnListProducts.setOnClickListener(v -> {
+            try {
+                // Create AddProductFragment
+                AddProductFragment addProductFragment = new AddProductFragment();
+
+                // Navigate to AddProductFragment
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, addProductFragment)
+                        .addToBackStack(null)
+                        .commit();
+
+            } catch (Exception e) {
+                // Log any exceptions
+                Log.e(TAG, "Error opening AddProductFragment", e);
+            }
+        });
+    }
+
+    // Method to navigate to product details
+    private void navigateToProductDetails(AgricultureProduct product) {
+        try {
+            // Create ProductDetailsFragment
+            ProductDetailsFragment detailsFragment = new ProductDetailsFragment();
+
+            // Create bundle with the data
+            Bundle bundle = new Bundle();
+            bundle.putString("product_id", product.getId());
+            bundle.putString("product_name", product.getName());
+            bundle.putString("product_category", product.getCategory());
+            bundle.putDouble("product_price", product.getPrice());
+            bundle.putString("product_location", product.getLocation());
+            bundle.putInt("product_instock", product.getInstock());
+            bundle.putString("product_packaging", product.getPackagingType());
+            bundle.putString("product_shipping", product.getShippingType());
+            bundle.putString("product_image", product.getImageUrl());
+
+            detailsFragment.setArguments(bundle);
+
+            // Navigate to details fragment
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, detailsFragment)
+                    .addToBackStack(null)
+                    .commit();
+
+        } catch (Exception e) {
+            // Log any exceptions that occur
+            Log.e(TAG, "Error in fragment transaction", e);
+            Toast.makeText(getContext(), "Error opening product details", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
