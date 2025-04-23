@@ -1,4 +1,4 @@
-package com.example.agrimart;
+package com.example.FarmerAdminAgrimart;
 
 public class Product {
     private String name;

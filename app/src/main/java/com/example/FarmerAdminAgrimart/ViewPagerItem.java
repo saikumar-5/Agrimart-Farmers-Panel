@@ -1,4 +1,4 @@
-package com.example.agrimart;
+package com.example.FarmerAdminAgrimart;
 
 public class ViewPagerItem {
     int imageId;

@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:822120030424:android:eac6b96a393e593a57b7ad",
+        "mobilesdk_app_id": "1:822120030424:android:a7b4472f435668ed57b7ad",
         "android_client_info": {
-          "package_name": "com.example.agrimart"
+          "package_name": "com.example.FarmerAdminAgrimart"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "822120030424-g5lufqcdjq1ko79p4kseu2uvbdo2h6lu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA7Cb8mWpWdBk0aN0feKRUUKN6vccHDupc"
@@ -20,7 +25,49 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822120030424-g5lufqcdjq1ko79p4kseu2uvbdo2h6lu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822120030424:android:eac6b96a393e593a57b7ad",
+        "android_client_info": {
+          "package_name": "com.example.agrimart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822120030424-unmk5phg7i9oguj6mljv9lllr9c5cbdm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agrimart",
+            "certificate_hash": "fb64a0387ac4c8ca5886869f33c9155626906e97"
+          }
+        },
+        {
+          "client_id": "822120030424-g5lufqcdjq1ko79p4kseu2uvbdo2h6lu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7Cb8mWpWdBk0aN0feKRUUKN6vccHDupc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822120030424-g5lufqcdjq1ko79p4kseu2uvbdo2h6lu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
