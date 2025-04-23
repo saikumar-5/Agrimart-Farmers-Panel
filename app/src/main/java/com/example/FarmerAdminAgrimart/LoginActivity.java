@@ -1,14 +1,12 @@
-package com.example.agrimart;
+package com.example.FarmerAdminAgrimart;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,11 +14,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
-import com.google.android.gms.auth.api.identity.Identity;
-import com.google.android.gms.auth.api.identity.SignInClient;
-import com.google.android.gms.auth.api.identity.SignInCredential;
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.common.api.ApiException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,14 +36,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editEmail, editPassword;
     private Button btnLogin;
-    private ImageButton btnGoogleLogin;
     private TextView goToSignup;
     private FrameLayout progressBar;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private SignInClient oneTapClient;
-    private BeginSignInRequest signInRequest;
 
     private List<String> profileNames = Arrays.asList("Pepper","Nala","Mittens","Sassy","Sugar","Socks","Bear","Garfield","Lucky","Gracie","Tinkerbell","Max","Midnight","Jack","Felix","Lily","Bandit","Milo","Lucy","Boots","Bailey","Chloe","Cuddles","Oscar","Annie","Luna","Kiki","Baby","Lola","Sasha","Zoey","Jack","Angel","Jasper","Misty","Sammy","Peanut","Kitty","Dusty","Casper","Lily","Boo");
     private List<String> profileCollections = Arrays.asList("micah", "notionists");
@@ -74,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.emailEditText);
         editPassword = findViewById(R.id.passwordEditText);
         btnLogin = findViewById(R.id.loginbtn);
-        btnGoogleLogin = findViewById(R.id.googlelogin);
         goToSignup = findViewById(R.id.createAccountBtn);
         progressBar = findViewById(R.id.progressOverlay);
 
@@ -84,8 +73,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
         });
-
-        btnGoogleLogin.setOnClickListener(v -> googleLogin());
     }
 
     private void loginUser() {

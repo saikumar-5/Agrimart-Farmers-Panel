@@ -9,117 +9,694 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="40dp"
-        android:paddingBottom="16dp"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- Top Bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingBottom="16dp">
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="16dp"
+            android:background="@color/white">
 
-            <!-- Account Title -->
-            <TextView
-                android:layout_width="0dp"
+            <!-- Top Bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Account"
-                android:fontFamily="@font/poppins_semibold"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:layout_weight="1"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="16dp">
 
-            <!-- Notification Icon -->
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/notification"
-                android:contentDescription="Notification Icon"/>
-        </LinearLayout>
+                <!-- Account Title -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Account"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"/>
 
-        <!-- Profile Section -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="12dp"
-            android:elevation="4dp">
-
-            <!-- Profile Image with Edit Icon -->
-            <RelativeLayout
-                android:layout_width="64dp"
-                android:layout_height="64dp">
-
+                <!-- Notification Icon -->
                 <ImageView
-                    android:id="@+id/profileImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/notification"
+                    android:contentDescription="Notification Icon"/>
+            </LinearLayout>
+
+            <!-- Profile Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+                android:elevation="4dp">
+
+                <!-- Profile Image with Edit Icon -->
+                <RelativeLayout
                     android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/profile_pic"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle_shape"/>
+                    android:layout_height="64dp">
 
-                <ImageView
-                    android:id="@+id/editIcon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:padding="6dp"
-                    android:src="@drawable/edit"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/circle_green"/>
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/profile_pic"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/circle_shape"/>
 
-            <!-- Name and Location -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:visibility="gone"
-                android:paddingStart="12dp">
-
-                <TextView
-                    android:id="@+id/userName"
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/editIcon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="6dp"
+                        android:src="@drawable/edit"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/circle_green"/>
+                </RelativeLayout>
+                <!-- Name and Location -->
+                <LinearLayout
+                    android:id="@+id/userDetailsLayout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Putta Abhiram"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:paddingStart="12dp">
 
-                <TextView
-                    android:id="@+id/userLocation"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Putta Abhiram"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/userLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bangalore, India"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btnLayout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Bangalore, India"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:paddingStart="12dp">
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:paddingStart="12dp">
 
-                <Button
-                    android:id="@+id/profileLoginBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/button_radius"
-                    android:backgroundTint="@color/AgrimartGreen"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Login/Signup"
-                    android:textColorLink="@color/AgrimartGreen" />
+                    <Button
+                        android:id="@+id/profileLoginBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/button_radius"
+                        android:backgroundTint="@color/AgrimartGreen"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Login/Signup"
+                        android:textColor="@color/white"
+                        android:textColorLink="@color/AgrimartGreen" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Personal Details"
+                            android:textSize="20dp"
+                            android:paddingHorizontal="20dp"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:fontFamily="@font/poppins_bold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/location" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Change address"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/user__1_" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Change email address"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/lock" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Change password"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order Details"
+                            android:textSize="20dp"
+                            android:paddingHorizontal="20dp"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:fontFamily="@font/poppins_bold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/location" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Order history"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/user__1_" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Order status"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/lock" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Payments"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/lock" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Order querys"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Setttings"
+                            android:textSize="20dp"
+                            android:paddingHorizontal="20dp"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:fontFamily="@font/poppins_bold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/location" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Language"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/user__1_" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Delete my account"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/lock" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Contact us"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/signout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/lock" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Signout"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/lock" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Help"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp" />
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/right_arrow_black" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
+
 
 </FrameLayout>

@@ -13,4 +13,10 @@
     <string name="onboarding4_heading">Fast Delivery, Fresh from Farmers</string>
     <string name="onboarding5_heading">Fast Delivery, Fresh from Farmers</string>
     <string name="default_web_client_id">822120030424-g5lufqcdjq1ko79p4kseu2uvbdo2h6lu.apps.googleusercontent.com</string>
+    <string-array name="gender_options">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
 </resources>

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.agrimart"
+    namespace = "com.example.FarmerAdminAgrimart"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.agrimart"
+        applicationId = "com.example.FarmerAdminAgrimart"
         minSdk = 27
         targetSdk = 35
         versionCode = 1
@@ -42,6 +42,11 @@ dependencies {
     implementation("com.caverock:androidsvg:1.4")
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.android.gms:play-services-base:18.3.0")
+    implementation("com.google.gms:google-services:4.4.2")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation(libs.constraintlayout)
     implementation(libs.appcompat)
     implementation(libs.firebase.auth)

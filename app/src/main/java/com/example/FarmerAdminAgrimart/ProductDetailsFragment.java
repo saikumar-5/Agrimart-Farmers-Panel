@@ -1,4 +1,4 @@
-package com.example.agrimart;
+package com.example.FarmerAdminAgrimart;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

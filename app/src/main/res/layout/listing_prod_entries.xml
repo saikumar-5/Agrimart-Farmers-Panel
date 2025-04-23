@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:text="Product Details"
         android:textColor="#000000"
+        android:fontFamily="@font/poppins_bold"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -45,231 +46,335 @@
         app:layout_constraintTop_toBottomOf="@id/tvProductDetailsTitle"
         app:layout_constraintBottom_toBottomOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="10dp"
+        android:orientation="vertical">
 
-        <!-- Add Product Images Section -->
         <TextView
-            android:id="@+id/tvAddProductImages"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="Add Product Images"
-            android:textColor="#000000"
             android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <!-- Image Add Button -->
-        <FrameLayout
-            android:id="@+id/flAddImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/image_upload_background"
+            android:fontFamily="@font/poppins_regular"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAddProductImages">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/ivAddImage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@drawable/add_icon" />
-        </FrameLayout>
-
-        <!-- Product Name -->
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Product name"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/flAddImage" />
-
-        <EditText
-            android:id="@+id/etProductName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="Product name"
-            android:inputType="text"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
-
-        <!-- Product Category -->
-        <TextView
-            android:id="@+id/tvProductCategory"
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Product Category"
-            android:textColor="#000000"
-            android:textSize="16sp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etProductName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
-        <EditText
-            android:id="@+id/etProductCategory"
-            android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <!-- This will contain our image views and add button -->
+                <LinearLayout
+                    android:id="@+id/imagesContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Add button -->
+                    <FrameLayout
+                        android:id="@+id/addButtonFrame"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginEnd="8dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/btnAddImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp"
+                            app:cardUseCompatPadding="true"
+                            app:contentPadding="8dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@android:drawable/ic_input_add" />
+
+                        </androidx.cardview.widget.CardView>
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productNameInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
+            android:hint="Product Name"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="@color/hint_text_color"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            android:layout_marginBottom="5dp"
+            app:hintTextColor="@color/hint_text_color">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editProductName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:background="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productCategoryInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Product Category"
-            android:inputType="text"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductCategory" />
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="@color/hint_text_color"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            android:layout_marginBottom="5dp"
+            app:hintTextColor="@color/hint_text_color">
 
-        <!-- Product Price -->
-        <TextView
-            android:id="@+id/tvProductPrice"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editProductCategory"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:background="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productPriceInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Product Price"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etProductCategory" />
+            android:hint="Product Price(per unit)"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="@color/hint_text_color"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            android:layout_marginBottom="5dp"
+            app:hintTextColor="@color/hint_text_color">
 
-        <EditText
-            android:id="@+id/etProductPrice"
-            android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:background="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productOfferPriceInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="Product price(per kg)"
-            android:inputType="numberDecimal"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductPrice" />
+            android:hint="Product Offer Price(per unit)"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="@color/hint_text_color"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            android:layout_marginBottom="5dp"
+            app:hintTextColor="@color/hint_text_color">
 
-        <!-- Product Location -->
-        <TextView
-            android:id="@+id/tvProductLocation"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editProductOfferPrice"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:background="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productInstockInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Product Location"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etProductPrice" />
+            android:hint="Product Instock"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="@color/hint_text_color"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            android:layout_marginBottom="5dp"
+            app:hintTextColor="@color/hint_text_color">
 
-        <EditText
-            android:id="@+id/etProductLocation"
-            android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editProductInstock"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:background="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productDescriptionInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="Product location"
-            android:inputType="text"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductLocation" />
+            android:hint="Product Description"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="@color/hint_text_color"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            android:layout_marginBottom="5dp"
+            app:hintTextColor="@color/hint_text_color">
 
-        <!-- Product Instock -->
-        <TextView
-            android:id="@+id/tvProductInstock"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editProductDescription"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:background="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productMinQuantityInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Product Instock"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etProductLocation" />
+            android:hint="Product Minimum Order Quantity"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="@color/hint_text_color"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            android:layout_marginBottom="5dp"
+            app:hintTextColor="@color/hint_text_color">
 
-        <EditText
-            android:id="@+id/etProductInstock"
-            android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editProductMinQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:background="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productPackagingInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="Product instock"
-            android:inputType="number"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductInstock" />
+            android:hint="Product Packaging"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="@color/hint_text_color"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            android:fillViewport="true"
+            app:hintTextColor="@color/hint_text_color">
 
-        <!-- Product Packaging Type -->
-        <TextView
-            android:id="@+id/tvProductPackagingType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Product Packaging Type"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etProductInstock" />
+            <AutoCompleteTextView
+                android:id="@+id/editproductPackaging"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="none"
+                android:padding="8dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:background="@null"
+                android:dropDownHeight="wrap_content"
+                android:dropDownVerticalOffset="8dp"
+                android:dropDownHorizontalOffset="0dp"
+                android:dropDownWidth="380dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/etProductPackagingType"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="Product packaging type"
-            android:inputType="text"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductPackagingType" />
-
-        <!-- Product Shipping Type -->
-        <TextView
-            android:id="@+id/tvProductShippingType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Product Shipping Type"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etProductPackagingType" />
-
-        <EditText
-            android:id="@+id/etProductShippingType"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="Product shipping type"
-            android:inputType="text"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductShippingType" />
-
-        <!-- Submit Button -->
         <Button
-            android:id="@+id/btnSubmitProduct"
-            android:layout_width="0dp"
+            android:id="@+id/addProductBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/rounded_button_bg"
-            android:text="Save Product"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etProductShippingType" />
+            android:text="Add Product"
+            android:background="@drawable/button_radius"
+            android:textColor="@color/white"
+            android:layout_marginVertical="20dp"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 </ScrollView>
+    <FrameLayout
+        android:id="@+id/progressOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressTint="@color/AgrimartGreen"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="50" />
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
