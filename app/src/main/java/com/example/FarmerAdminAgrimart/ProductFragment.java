@@ -164,7 +164,7 @@ public class ProductFragment extends Fragment {
             bundle.putString("product_id", product.getId());
             bundle.putString("product_name", product.getName());
             bundle.putString("product_category", product.getCategory());
-            bundle.putDouble("product_price", product.getPrice());
+            bundle.putString("product_price", product.getPrice());
             bundle.putString("product_location", product.getLocation());
             bundle.putInt("product_instock", product.getInstock());
             bundle.putString("product_packaging", product.getPackagingType());

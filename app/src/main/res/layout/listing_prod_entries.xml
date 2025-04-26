@@ -119,6 +119,34 @@
         </HorizontalScrollView>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productImageURLInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Image URL"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="@color/hint_text_color"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            android:layout_marginBottom="5dp"
+            app:hintTextColor="@color/hint_text_color">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editProductImageURL"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:background="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/productNameInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
