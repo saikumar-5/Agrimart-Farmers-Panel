@@ -4,7 +4,7 @@ public class AgricultureProduct {
     private String id;
     private String name;
     private String category;
-    private double price;
+    private String price;
     private String location;
     private int instock;
     private String packagingType;
@@ -16,7 +16,7 @@ public class AgricultureProduct {
     {
 
     }
-    public AgricultureProduct(String name, String category, double price, String location,
+    public AgricultureProduct(String name, String category, String price, String location,
                    int instock, String packagingType, String shippingType) {
         this.name = name;
         this.category = category;
@@ -28,7 +28,7 @@ public class AgricultureProduct {
     }
 
     // Full constructor
-    public AgricultureProduct(String id, String name, String category, double price, String location,
+    public AgricultureProduct(String id, String name, String category, String price, String location,
                    int instock, String packagingType, String shippingType, String imageUrl) {
         this.id = id;
         this.name = name;
@@ -66,11 +66,11 @@ public class AgricultureProduct {
         this.category = category;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
