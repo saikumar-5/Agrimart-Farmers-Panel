@@ -9,7 +9,7 @@ public class AgricultureProduct {
     private int instock;
     private String packagingType;
     private String shippingType;
-    private String imageUrl;
+    private String ImageURL;
 
     // Constructor without id and imageUrl (for new products)
     public AgricultureProduct()
@@ -29,7 +29,7 @@ public class AgricultureProduct {
 
     // Full constructor
     public AgricultureProduct(String id, String name, String category, String price, String location,
-                   int instock, String packagingType, String shippingType, String imageUrl) {
+                   int instock, String packagingType, String shippingType, String ImageURL) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -38,7 +38,7 @@ public class AgricultureProduct {
         this.instock = instock;
         this.packagingType = packagingType;
         this.shippingType = shippingType;
-        this.imageUrl = imageUrl;
+        this.ImageURL = ImageURL;
     }
 
     // Getters and setters
@@ -107,10 +107,10 @@ public class AgricultureProduct {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return ImageURL;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageUrl(String ImageURL) {
+        this.ImageURL = ImageURL;
     }
 }

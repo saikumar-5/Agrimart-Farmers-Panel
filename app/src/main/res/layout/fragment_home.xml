@@ -86,6 +86,7 @@
                     app:layout_columnWeight="1">
 
                     <LinearLayout
+                        android:id="@+id/salesblock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
@@ -144,6 +145,7 @@
                     app:layout_columnWeight="1">
 
                     <LinearLayout
+                        android:id="@+id/productsblock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
@@ -202,6 +204,7 @@
                     app:layout_columnWeight="1">
 
                     <LinearLayout
+                        android:id="@+id/ordersblock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
@@ -260,6 +263,7 @@
                     app:layout_columnWeight="1">
 
                     <LinearLayout
+                        android:id="@+id/customersblock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
@@ -318,6 +322,7 @@
                     app:layout_columnWeight="1">
 
                     <LinearLayout
+                        android:id="@+id/paymentsblock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
@@ -376,6 +381,7 @@
                     app:layout_columnWeight="1">
 
                     <LinearLayout
+                        android:id="@+id/queriesblock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"

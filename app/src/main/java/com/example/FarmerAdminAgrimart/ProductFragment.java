@@ -22,7 +22,7 @@ public class ProductFragment extends Fragment {
     private static final String TAG = "ProductFragment";
     private Button btnListProducts;
     private RecyclerView recyclerView;
-    private ProductAdapter adapter;
+    private AgricultureProductAdapter adapter;
     private List<AgricultureProduct> productList;
     private FirestoreHelper firestoreHelper;
 
@@ -42,8 +42,8 @@ public class ProductFragment extends Fragment {
         // Initialize product list
         productList = new ArrayList<>();
 
-        // Initialize the adapter
-        adapter = new ProductAdapter(productList, this::navigateToProductDetails);
+        // Initialize the adapter with click listener
+        adapter = new AgricultureProductAdapter(productList, this::navigateToProductDetails);
         recyclerView.setAdapter(adapter);
 
         // Initialize the "List your product" button
@@ -61,8 +61,7 @@ public class ProductFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // Refresh products when coming back to this fragment
-        loadProductsFromFirestore();
+        loadProductsFromFirestore(); // Refresh data
     }
 
     private void loadProductsFromFirestore() {
@@ -76,19 +75,13 @@ public class ProductFragment extends Fragment {
             }
 
             @Override
-            public void DataIsInserted() {
-                // Not used here
-            }
+            public void DataIsInserted() { }
 
             @Override
-            public void DataIsUpdated() {
-                // Not used here
-            }
+            public void DataIsUpdated() { }
 
             @Override
-            public void DataIsDeleted() {
-                // Not used here
-            }
+            public void DataIsDeleted() { }
 
             @Override
             public void DataOperationFailed(String message) {
@@ -96,50 +89,13 @@ public class ProductFragment extends Fragment {
                 Log.e(TAG, "Failed to load products: " + message);
             }
         });
-
-        // Optional: Set up real-time listener for product changes
-        // setupRealtimeUpdates();
-    }
-
-    private void setupRealtimeUpdates() {
-        firestoreHelper.listenForProductChanges(new FirestoreHelper.DataStatus() {
-            @Override
-            public void DataIsLoaded(List<AgricultureProduct> products) {
-                productList.clear();
-                productList.addAll(products);
-                adapter.notifyDataSetChanged();
-                Log.d(TAG, "Real-time update: " + products.size() + " products");
-            }
-
-            @Override
-            public void DataIsInserted() {
-                // Not used here
-            }
-
-            @Override
-            public void DataIsUpdated() {
-                // Not used here
-            }
-
-            @Override
-            public void DataIsDeleted() {
-                // Not used here
-            }
-
-            @Override
-            public void DataOperationFailed(String message) {
-                Log.e(TAG, "Real-time update failed: " + message);
-            }
-        });
     }
 
     private void setupClickListeners() {
         btnListProducts.setOnClickListener(v -> {
             try {
-                // Create AddProductFragment
                 AddProductFragment addProductFragment = new AddProductFragment();
 
-                // Navigate to AddProductFragment
                 requireActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, addProductFragment)
@@ -147,19 +103,15 @@ public class ProductFragment extends Fragment {
                         .commit();
 
             } catch (Exception e) {
-                // Log any exceptions
                 Log.e(TAG, "Error opening AddProductFragment", e);
             }
         });
     }
 
-    // Method to navigate to product details
     private void navigateToProductDetails(AgricultureProduct product) {
         try {
-            // Create ProductDetailsFragment
             ProductDetailsFragment detailsFragment = new ProductDetailsFragment();
 
-            // Create bundle with the data
             Bundle bundle = new Bundle();
             bundle.putString("product_id", product.getId());
             bundle.putString("product_name", product.getName());
@@ -173,7 +125,6 @@ public class ProductFragment extends Fragment {
 
             detailsFragment.setArguments(bundle);
 
-            // Navigate to details fragment
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, detailsFragment)
@@ -181,7 +132,6 @@ public class ProductFragment extends Fragment {
                     .commit();
 
         } catch (Exception e) {
-            // Log any exceptions that occur
             Log.e(TAG, "Error in fragment transaction", e);
             Toast.makeText(getContext(), "Error opening product details", Toast.LENGTH_SHORT).show();
         }

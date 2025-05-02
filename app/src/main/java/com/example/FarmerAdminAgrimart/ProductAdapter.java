@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -49,6 +52,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         notifyItemInserted(productList.size() - 1);
     }
 
+    // Method to update the entire product list
+    public void updateProductList(List<AgricultureProduct> newProducts) {
+        productList.clear();
+        productList.addAll(newProducts);
+        notifyDataSetChanged();
+    }
+
     static class ProductViewHolder extends RecyclerView.ViewHolder {
         private ImageView ivProductImage;
         private TextView tvProductName, tvProductQuantity, tvProductPrice;
@@ -67,9 +77,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     product.getPackagingType() : "1 kg");
             tvProductPrice.setText("₹" + product.getPrice() + "/kg");
 
-            // If we have a valid image URL/resource, set it
-            // Otherwise, use a default image
-            ivProductImage.setImageResource(R.drawable.tomatoes); // Default image for now
+            // Load image from URL using Glide
+            if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) {
+                RequestOptions requestOptions = new RequestOptions()
+                        .placeholder(R.drawable.tomatoes)  // Show placeholder while loading
+                        .error(R.drawable.tomatoes);       // Show default image if loading fails
+
+                Glide.with(itemView.getContext())
+                        .load(product.getImageUrl())
+                        .apply(requestOptions)
+                        .into(ivProductImage);
+            } else {
+                // If no image URL is available, use default image
+                ivProductImage.setImageResource(R.drawable.tomatoes);
+            }
 
             itemView.setOnClickListener(v -> {
                 if (listener != null) {

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import com.example.FarmerAdminAgrimart.R;
 
 public class SplashActivity extends AppCompatActivity {
 
