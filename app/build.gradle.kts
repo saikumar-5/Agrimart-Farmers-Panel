@@ -46,6 +46,8 @@ dependencies {
     implementation("com.google.gms:google-services:4.4.2")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.navigation.runtime)
+    implementation(libs.navigation.fragment)
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation(libs.constraintlayout)
     implementation(libs.appcompat)
@@ -61,8 +63,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.gridlayout:gridlayout:1.0.0")
-
-
-
 }
 

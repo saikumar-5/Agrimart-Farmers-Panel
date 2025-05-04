@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Row: Name and Phone -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/customerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Venkata Ramana"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_alignParentStart="true"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:id="@+id/phoneIcons"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/phonecall"
+                    app:tint="#4CAF50" />
+
+                <TextView
+                    android:id="@+id/customerPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9908947050"
+                    android:textSize="14sp"
+                    android:paddingStart="6dp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- Order ID and Amount -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/orderId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order ID: #4340"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:id="@+id/orderAmounts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹ 5,500"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/AgrimartGreen"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <!-- Status and Date -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:id="@+id/orderStatuss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirmed"
+                android:textSize="14sp"
+                android:textColor="#757575"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:id="@+id/orderDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fri, 25 Jan"
+                android:textSize="14sp"
+                android:textColor="#757575"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <!-- Order Progress Tracker -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <!-- Step 1: Confirmed -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/confirmedIcons"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/orderconfirmationwhite"
+                    android:background="@drawable/circle_backgrnd_green"
+                    android:padding="6dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirmed"
+                    android:textSize="10sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Line between steps -->
+            <View
+                android:layout_width="16dp"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="center_vertical"/>
+
+            <!-- Step 2: Picked Up -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/pickedUpIcons"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/deliverymangreen"
+                    android:background="@drawable/crcle_bg"
+                    android:padding="6dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Picked Up"
+                    android:textSize="10sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Line between steps -->
+            <View
+                android:layout_width="16dp"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="center_vertical"/>
+
+            <!-- Step 3: Shipped -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/shippedIcons"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/transportgreen"
+                    android:background="@drawable/crcle_bg"
+                    android:padding="6dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shipped"
+                    android:textSize="10sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Line between steps -->
+            <View
+                android:layout_width="16dp"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="center_vertical"/>
+
+            <!-- Step 4: Out for Delivery -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/outForDeliveryIcons"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/outoftheboxgreen"
+                    android:background="@drawable/crcle_bg"
+                    android:padding="6dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Out for Delivery"
+                    android:textSize="8sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Line between steps -->
+            <View
+                android:layout_width="16dp"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="center_vertical"/>
+
+            <!-- Step 5: Delivered -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/deliveredIcons"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/parcelgreen"
+                    android:background="@drawable/crcle_bg"
+                    android:padding="6dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delivered"
+                    android:textSize="10sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

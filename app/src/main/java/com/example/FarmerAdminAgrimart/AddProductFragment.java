@@ -40,31 +40,23 @@ public class AddProductFragment extends Fragment {
 
     private static final String TAG = "AddProductFragment";
     private static final int PICK_IMAGE_REQUEST = 1;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
 
     private FrameLayout addButtonFrame;
     private ViewGroup imagesContainer;
     private Button addProductbtn;
     private List<Uri> imageUriList = new ArrayList<>();
     private ProgressBar progressBar;
-    private TextInputEditText productImageURL, productName, productCategory, productPrice, productOfferPrice,
-            productInstock, productDescription, productMinOrder;
-    private AutoCompleteTextView productPackaging;
 
-    // Firebase Auth
+    private TextInputEditText productImageURL, productName, productPrice, productOfferPrice,
+            productInstock, productDescription, productMinOrder;
+    private AutoCompleteTextView productCategory, productPackaging;
+
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -81,43 +73,47 @@ public class AddProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.listing_prod_entries, container, false);
 
+        // Initialize UI
         addButtonFrame = view.findViewById(R.id.addButtonFrame);
         imagesContainer = view.findViewById(R.id.imagesContainer);
         addProductbtn = view.findViewById(R.id.addProductBtn);
         progressBar = view.findViewById(R.id.progressBar);
 
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }
+        if (progressBar != null) progressBar.setVisibility(View.GONE);
 
         productImageURL = view.findViewById(R.id.editProductImageURL);
         productName = view.findViewById(R.id.editProductName);
-        productCategory = view.findViewById(R.id.editProductCategory);
         productPrice = view.findViewById(R.id.editProductPrice);
         productOfferPrice = view.findViewById(R.id.editProductOfferPrice);
         productDescription = view.findViewById(R.id.editProductDescription);
         productInstock = view.findViewById(R.id.editProductInstock);
         productMinOrder = view.findViewById(R.id.editProductMinQuantity);
+
+        // Updated: AutoCompleteTextView for Product Category
+        productCategory = view.findViewById(R.id.editProductCategory);
+        String[] categories = {"Vegetables", "Fruits", "Cereal & Grain", "OilSeeds"};
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, categories);
+        productCategory.setAdapter(categoryAdapter);
+        productCategory.setOnClickListener(v -> productCategory.showDropDown());
+
+        // AutoCompleteTextView for Packaging
         productPackaging = view.findViewById(R.id.editproductPackaging);
+        String[] packagingItems = {"Box", "Gunny Bag", "Plastic Crate", "Loose"};
+        ArrayAdapter<String> packagingAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, packagingItems);
+        productPackaging.setAdapter(packagingAdapter);
+        productPackaging.setOnClickListener(v -> productPackaging.showDropDown());
 
         View btnAddImage = view.findViewById(R.id.btnAddImage);
         btnAddImage.setOnClickListener(v -> openImagePicker());
-
-        String[] packagingItems = new String[]{"Box", "Gunny Bag", "Plastic Crate", "Loose"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                packagingItems
-        );
-        productPackaging.setAdapter(adapter);
-        productPackaging.setOnClickListener(v -> productPackaging.showDropDown());
 
         addProductbtn.setOnClickListener(v -> validateAndUploadProduct());
 
         return view;
     }
 
-    private void openImagePicker() {
+    // ... Rest of the existing code remains unchanged (upload logic, image handling, etc.)
+
+private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);

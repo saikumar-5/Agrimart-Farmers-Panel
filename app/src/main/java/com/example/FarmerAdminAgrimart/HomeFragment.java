@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeFragment extends Fragment {
 
@@ -28,24 +29,27 @@ public class HomeFragment extends Fragment {
         LinearLayout queriesBlock = view.findViewById(R.id.queriesblock);
 
         // Set click listeners for each block
-//        salesBlock.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Navigate to Analytics using its nav ID
-//                NavController navController = NavHostFragment.findNavController(HomeFragment.this);
-//                navController.navigate(R.id.analyticsFragment); // <-- Make sure this ID is correct in your nav_graph.xml
-//
-//                // Change selected item in BottomNavigationView
-//                BottomNavigationView navBar = requireActivity().findViewById(R.id.bottomNavigationView);
-//                navBar.setSelectedItemId(R.id.analyticsFragment); // same ID as the nav menu item
-//            }
-//        });
+        salesBlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open the Analytics fragment using the same pattern as other fragments
+                openFragment(new WishlistFragment());
 
+                // Update the bottom navigation
+                BottomNavigationView navBar = requireActivity().findViewById(R.id.bottom_navigation);
+                navBar.setSelectedItemId(R.id.nav_products); // Use your actual menu item ID
+            }
+        });
 
         productsBlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFragment(new ProductPage());
+                // Open the Analytics fragment using the same pattern as other fragments
+                openFragment(new ProductFragment());
+
+                // Update the bottom navigation
+                BottomNavigationView navBar = requireActivity().findViewById(R.id.bottom_navigation);
+                navBar.setSelectedItemId(R.id.nav_wishlist); // Use your actual menu item ID
             }
         });
 
@@ -53,6 +57,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 openFragment(new OrdersPage());
+                BottomNavigationView navBar = requireActivity().findViewById(R.id.bottom_navigation);
+                navBar.setSelectedItemId(R.id.nav_cart);
             }
         });
 

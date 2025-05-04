@@ -176,7 +176,7 @@
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_marginEnd="10dp"
-                                    android:src="@drawable/location" />
+                                    android:src="@drawable/location_on_24dp_000000" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -319,7 +319,7 @@
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_marginEnd="10dp"
-                                    android:src="@drawable/location" />
+                                    android:src="@drawable/shopping_basket_24dp_000000__1_" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -439,7 +439,7 @@
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_marginEnd="10dp"
-                                    android:src="@drawable/lock" />
+                                    android:src="@drawable/help_outline_24dp_000000" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -503,7 +503,7 @@
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_marginEnd="10dp"
-                                    android:src="@drawable/location" />
+                                    android:src="@drawable/language_24dp_000000" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -583,7 +583,7 @@
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_marginEnd="10dp"
-                                    android:src="@drawable/lock" />
+                                    android:src="@drawable/contact_support_24dp_000000" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
