@@ -1,5 +1,6 @@
 package com.example.FarmerAdminAgrimart;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,6 @@ public class AgricultureProductAdapter extends RecyclerView.Adapter<AgricultureP
         return new ProductViewHolder(view);
     }
 
-    @PropertyName("ImageURL")
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         AgricultureProduct product = productList.get(position);
@@ -54,7 +54,11 @@ public class AgricultureProductAdapter extends RecyclerView.Adapter<AgricultureP
             holder.ivProductImage.setImageResource(R.drawable.placeholder_image);
         }
 
-        holder.itemView.setOnClickListener(v -> listener.onProductClick(product));
+        // Set a single click listener that both logs and calls the interface method
+        holder.itemView.setOnClickListener(v -> {
+            Log.d("CardView", "Item clicked: " + position);
+            listener.onProductClick(product);
+        });
     }
 
     @Override
@@ -68,7 +72,7 @@ public class AgricultureProductAdapter extends RecyclerView.Adapter<AgricultureP
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tvProductName); // Update ID based on your layout
+            tvName = itemView.findViewById(R.id.tvProductName);
             tvPrice = itemView.findViewById(R.id.tvProductPrice);
             ivProductImage = itemView.findViewById(R.id.ivProductImage);
         }

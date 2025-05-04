@@ -1,9 +1,16 @@
 package com.example.FarmerAdminAgrimart;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,39 +19,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 public class ProductDetailsFragment extends Fragment {
 
-    private static final String ARG_PRODUCT_NAME = "product_name";
-    private static final String ARG_PRODUCT_WEIGHT = "product_weight";
-    private static final String ARG_PRODUCT_PRICE = "product_price";
-    private static final String ARG_PRODUCT_IMAGE = "product_image";
-
-    // New constructor that accepts an image URL string instead of resource ID
-    public static ProductDetailsFragment newInstance(String name, String weight, String price, String imageUrl) {
-        ProductDetailsFragment fragment = new ProductDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PRODUCT_NAME, name);
-        args.putString(ARG_PRODUCT_WEIGHT, weight);
-        args.putString(ARG_PRODUCT_PRICE, price);
-        args.putString(ARG_PRODUCT_IMAGE, imageUrl);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    // Keep the old constructor for backward compatibility
-    public static ProductDetailsFragment newInstance(String name, String weight, String price, int imageResId) {
-        ProductDetailsFragment fragment = new ProductDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PRODUCT_NAME, name);
-        args.putString(ARG_PRODUCT_WEIGHT, weight);
-        args.putString(ARG_PRODUCT_PRICE, price);
-        args.putInt(ARG_PRODUCT_IMAGE, imageResId);
-        args.putBoolean("isResourceId", true);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private TextView tvName, tvPrice, tvCategory, tvLocation, tvPackaging, tvShipping, tvInStock;
+    private ImageView ivProductImage;
+    private int currentStock = 0;
+    private String productId = "";
+    private String imageUrl = "";
 
     @Nullable
     @Override
@@ -52,37 +34,105 @@ public class ProductDetailsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_details, container, false);
 
-        TextView name = view.findViewById(R.id.tvProductName);
-        TextView weight = view.findViewById(R.id.tvProductQuantity);
-        TextView price = view.findViewById(R.id.tvProductPrice);
-        ImageView image = view.findViewById(R.id.ivProductImage);
+        // Find views by ID
+        tvName = view.findViewById(R.id.prdtitle);
+        tvPrice = view.findViewById(R.id.prcperkg);
+        tvCategory = view.findViewById(R.id.catetxt);
+        tvLocation = view.findViewById(R.id.sellloc);
+        tvPackaging = view.findViewById(R.id.catetxt);    // Consider using a different ID for packaging
+        tvShipping = view.findViewById(R.id.sellname);     // Consider using a different ID for shipping
+        tvInStock = view.findViewById(R.id.stcqnt);
+        ivProductImage = view.findViewById(R.id.prdimg);
 
-        if (getArguments() != null) {
-            name.setText(getArguments().getString(ARG_PRODUCT_NAME));
-            weight.setText(getArguments().getString(ARG_PRODUCT_WEIGHT));
-            price.setText(getArguments().getString(ARG_PRODUCT_PRICE));
+        // Back button
+        ImageButton btnBack = view.findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 
-            // Check if we're using a resource ID or URL for the image
-            if (getArguments().getBoolean("isResourceId", false)) {
-                // Using resource ID (original way)
-                image.setImageResource(getArguments().getInt(ARG_PRODUCT_IMAGE));
-            } else {
-                // Using URL (new way)
-                String imageUrl = getArguments().getString(ARG_PRODUCT_IMAGE);
-                if (imageUrl != null && !imageUrl.isEmpty()) {
-                    // Load image with Glide
-                    Glide.with(this)
-                            .load(imageUrl)
-                            .placeholder(R.drawable.tomatoes)
-                            .error(R.drawable.tomatoes)
-                            .into(image);
-                } else {
-                    // Fallback to default image
-                    image.setImageResource(R.drawable.tomatoes);
-                }
-            }
+        // Get arguments and set data
+        Bundle args = getArguments();
+        if (args != null) {
+            productId = args.getString("product_id", "");
+            imageUrl = args.getString("product_image", "");
+            tvName.setText(args.getString("product_name", "No Name"));
+            tvPrice.setText(String.format("₹ %s", args.getString("product_price", "0.00")));
+            tvCategory.setText(args.getString("product_category", "No Category"));
+            tvLocation.setText(args.getString("product_location", "Bengaluru"));
+            tvPackaging.setText(String.format("Packing Type : %s", args.getString("product_packaging", "Gunny Bags")));
+            tvShipping.setText(args.getString("product_shipping", "Abhiram"));
+            currentStock = args.getInt("product_instock", 0);
+            tvInStock.setText("In stock: " + currentStock);
+
+            Glide.with(requireContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.placeholder_image)
+                    .into(ivProductImage);
         }
 
+        // Add Stock button
+        Button addStockBtn = view.findViewById(R.id.addstckbtn);
+        addStockBtn.setOnClickListener(v -> showAddStockDialog());
+
+        // Edit Product button
+        Button editProductBtn = view.findViewById(R.id.editprdbtn);
+        editProductBtn.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("product_id", productId);
+            bundle.putString("product_name", tvName.getText().toString());
+            bundle.putString("product_price", tvPrice.getText().toString().replace("₹", "").trim());
+            bundle.putString("product_category", tvCategory.getText().toString());
+            bundle.putString("product_instock", String.valueOf(currentStock));
+            bundle.putString("product_packaging", tvPackaging.getText().toString());
+            bundle.putString("product_image", imageUrl);
+
+            AddProductFragment editFragment = new AddProductFragment();
+            editFragment.setArguments(bundle);
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, editFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+
         return view;
+    }
+
+    private void showAddStockDialog() {
+        Dialog dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_add_stock);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        EditText quantityInput = dialog.findViewById(R.id.quantityInput);
+        TextView totalStockValue = dialog.findViewById(R.id.totalStockValue);
+        Button addButton = dialog.findViewById(R.id.addButton);
+        Button removeButton = dialog.findViewById(R.id.removeButton);
+        Button saveButton = dialog.findViewById(R.id.saveButton);
+
+        int[] qty = {1};
+        quantityInput.setText(qty[0] + " Kg's");
+        totalStockValue.setText((currentStock + qty[0]) + " Kg's");
+
+        addButton.setOnClickListener(v -> {
+            qty[0]++;
+            quantityInput.setText(qty[0] + " Kg's");
+            totalStockValue.setText((currentStock + qty[0]) + " Kg's");
+        });
+
+        removeButton.setOnClickListener(v -> {
+            if (qty[0] > 1) qty[0]--;
+            quantityInput.setText(qty[0] + " Kg's");
+            totalStockValue.setText((currentStock + qty[0]) + " Kg's");
+        });
+
+        saveButton.setOnClickListener(v -> {
+            int newStock = currentStock + qty[0];
+            currentStock = newStock;
+            tvInStock.setText("In stock: " + newStock);
+            // TODO: Update Firestore/database if needed
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 }
