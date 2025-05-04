@@ -13,6 +13,19 @@
     <string name="onboarding4_heading">Fast Delivery, Fresh from Farmers</string>
     <string name="onboarding5_heading">Fast Delivery, Fresh from Farmers</string>
     <string name="default_web_client_id">822120030424-g5lufqcdjq1ko79p4kseu2uvbdo2h6lu.apps.googleusercontent.com</string>
+    <string name="user_profile">User profile</string>
+    <string name="bank_icon">Bank icon</string>
+    <string name="back_button">Back button</string>
+    <string name="search_icon">Search icon</string>
+    <string name="order_id_placeholder">Order ID : #%1$s</string>
+    <string name="amount_placeholder">₹%1$.2f</string>
+    <string name="order_id_placeholder_example">Order ID : #4340</string>
+    <string name="order_date_example">Wed, 25 January 2025, 12:55 PM</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="phone">Phone</string>
+    <string name="amount_example">₹80/kg</string>
+    <string name="status_confirmed">Confirmed</string>
+    <string name="order_progress_placeholder">Order Progress Here</string>
     <string-array name="gender_options">
         <item>Male</item>
         <item>Female</item>

@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QueriesPage">
+    android:orientation="vertical"
+    android:background="#EFEFEF">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Status bar padding -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="30dp"
+        android:background="#EFEFEF" />
 
-</FrameLayout>
+    <!-- Toolbar with custom back icon and title -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EFEFEF"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back"
+            android:contentDescription="@string/back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Queries"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- Add Query Button -->
+    <Button
+        android:id="@+id/add_query_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ask a Query"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:backgroundTint="#65A563"
+        android:background="@drawable/white_rounded_box"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:paddingVertical="12dp"
+        android:elevation="2dp" />
+
+    <!-- Queries List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/queries_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
+        android:clipToPadding="false" />
+
+</LinearLayout>
