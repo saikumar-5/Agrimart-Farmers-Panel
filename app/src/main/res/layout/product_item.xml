@@ -6,12 +6,12 @@
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     android:layout_marginTop="8dp"
+    android:clickable="true"
     android:layout_marginBottom="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
@@ -38,10 +38,9 @@
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/ivMore"
             app:layout_constraintStart_toEndOf="@+id/ivProductImage"
             app:layout_constraintTop_toTopOf="parent" />
-
+        <!--app:layout_constraintEnd_toStartOf="@+id/ivMore"-->
         <!-- Product Quantity -->
         <TextView
             android:id="@+id/tvProductQuantity"
@@ -70,13 +69,13 @@
             app:layout_constraintTop_toBottomOf="@+id/tvProductQuantity" />
 
         <!-- More Options Icon -->
-        <ImageView
-            android:id="@+id/ivMore"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/menu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <ImageView-->
+<!--            android:id="@+id/ivMore"-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/menu"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

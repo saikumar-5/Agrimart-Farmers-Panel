@@ -13,6 +13,7 @@
     <string name="onboarding4_heading">Fast Delivery, Fresh from Farmers</string>
     <string name="onboarding5_heading">Fast Delivery, Fresh from Farmers</string>
     <string name="default_web_client_id">822120030424-g5lufqcdjq1ko79p4kseu2uvbdo2h6lu.apps.googleusercontent.com</string>
+
     <string name="user_profile">User profile</string>
     <string name="bank_icon">Bank icon</string>
     <string name="back_button">Back button</string>
@@ -26,6 +27,17 @@
     <string name="amount_example">₹80/kg</string>
     <string name="status_confirmed">Confirmed</string>
     <string name="order_progress_placeholder">Order Progress Here</string>
+
+    <string name="product_price_label">Price :</string>
+    <string name="accname">Abhirma</string>
+    <string name="veg">Vegetables</string>
+    <string name="place">Bengaluru</string>
+    <string name="product_instock_label">In stock: </string>
+    <string name="edit">Edit</string>
+    <string name="add_stock">Add Stock</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="back">Back</string>
+
     <string-array name="gender_options">
         <item>Male</item>
         <item>Female</item>

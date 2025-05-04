@@ -1,76 +1,334 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductDetailsFragment">
+    android:background="#FFFFFF">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/circle_background"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/back" />
+
+    <!-- Product Image -->
+    <ImageView
+        android:id="@+id/prdimg"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="15dp"
+        android:contentDescription="Product Image"
+        android:src="@drawable/placeholder_image" />
+
+    <!-- Category Text -->
+
+    <!-- Product Title -->
+    <TextView
+        android:id="@+id/prdtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:text="Freshly Harvested Tomatoes – Perfect for Cooking"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/prdimg" />
+
+    <TextView
+        android:id="@+id/catetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"
+        android:text="Vegetables"
+        android:textColor="#808080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/prdtitle" />
+    <!-- Seller Info Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sellercard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="#4CAF50"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/stockInfoCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/catetxt">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <!-- Seller Avatar -->
+            <ImageView
+                android:id="@+id/sellava"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/circle_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/profile_pic" />
+
+            <!-- Seller Name -->
+            <TextView
+                android:id="@+id/sellname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/accname"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/sellava"
+                app:layout_constraintTop_toTopOf="@id/sellava" />
+
+            <!-- Seller Location -->
+            <TextView
+                android:id="@+id/sellloc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/place"
+                android:textColor="#E6FFFFFF"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/sellava"
+                app:layout_constraintTop_toBottomOf="@id/sellname" />
+
+            <!-- Price Per Kg -->
+            <TextView
+                android:id="@+id/prcperkg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="₹40/kg"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sellloc" />
+
+            <!-- Edit Price Button -->
+<!--            <Button-->
+<!--                android:id="@+id/editbtn"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="12dp"-->
+<!--                android:background="@drawable/rounded_button_bg"-->
+<!--                android:backgroundTint="#FFFFFF"-->
+<!--                android:text="Edit"-->
+<!--                android:textColor="#4CAF50"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/prcperkg" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Stock Info Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/stockInfoCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sellercard"
+        app:layout_constraintTop_toBottomOf="@id/catetxt">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <!-- In Stock Label -->
+            <TextView
+                android:id="@+id/stlevl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="In stock"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Stock Quantity -->
+            <TextView
+                android:id="@+id/stcqnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 Kg's"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Add Stock Button -->
+            <Button
+                android:id="@+id/addstckbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_button_bg"
+                android:backgroundTint="#FFFFFF"
+                android:text="Add Stock"
+                android:textColor="#4CAF50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stlevl" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Reviews Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/reviewcard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stockInfoCard">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <!-- Star Icon -->
+            <ImageView
+                android:id="@+id/staricon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/star"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Rating Value -->
+            <TextView
+                android:id="@+id/ratingval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="4.8"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/staricon"
+                app:layout_constraintStart_toEndOf="@id/staricon"
+                app:layout_constraintTop_toTopOf="@id/staricon" />
+
+            <!-- Review Count -->
+            <TextView
+                android:id="@+id/reviewcnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25 reviews"
+                android:textColor="#666666"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/ratingval"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ratingval" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Sales Info Section -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/saleinfcard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="24dp">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reviewcard">
 
-        <ImageView
-            android:id="@+id/ivProductImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="24dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Product Name"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            app:layout_constraintTop_toBottomOf="@id/ivProductImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"/>
+            <!-- Total Sold Quantity -->
+            <TextView
+                android:id="@+id/sldqnt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Total Sold Quantity : 55 Kg's"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvProductQuantity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Quantity"
-            android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tvProductName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"/>
+            <!-- Total Earnings -->
+            <TextView
+                android:id="@+id/earning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Total Earnings : ₹7,750"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sldqnt" />
 
-        <TextView
-            android:id="@+id/tvProductPrice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Price"
-            android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tvProductQuantity"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Edit Product Button -->
+    <Button
+        android:id="@+id/editprdbtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button_bg"
+        android:backgroundTint="#4CAF50"
+        android:padding="12dp"
+        android:text="Edit Product"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/saleinfcard"
+        app:layout_constraintVertical_bias="0.0" />
 
-</FrameLayout>
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-    <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    android:background="#FFFF00">-->
-
-    <!--    <TextView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:text="Details Page"-->
-    <!--        android:textSize="24sp"/>-->
-
-    <!--</FrameLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -20,6 +21,14 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        ImageView notificationicon= view.findViewById(R.id.notificon);
+        notificationicon.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                openFragment(new NotificationFragment());
+            }
+        });
         // Find all the blocks by ID
         LinearLayout salesBlock = view.findViewById(R.id.salesblock);
         LinearLayout productsBlock = view.findViewById(R.id.productsblock);
