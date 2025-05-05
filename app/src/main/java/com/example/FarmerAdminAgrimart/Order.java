@@ -1,105 +1,130 @@
 package com.example.FarmerAdminAgrimart;
 
-/**
- * Model class representing an order in the application
- */
-public class Order {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Order implements Serializable {
     private String customerName;
     private String phoneNumber;
     private String orderId;
-    private double amount;
-    private String date;
+    private double sellingPrice;
+    private String orderDate;
     private String status;
-    private int currentStep;
+    private int stepNumber;
+    private String customerAddress;
+    private double listPrice;
+    private String deliveryAgentPhone;
+    private List<OrderItem> items;
 
-    /**
-     * Constructor for Order
-     *
-     * @param customerName The name of the customer
-     * @param phoneNumber The phone number of the customer
-     * @param orderId The unique identifier for the order
-     * @param amount The total amount of the order
-     * @param date The date when the order was placed
-     * @param status The current status of the order (text description)
-     * @param currentStep The current step in the order progress (0-4)
-     *                    0 = Confirmed
-     *                    1 = Picked Up
-     *                    2 = Shipped
-     *                    3 = Out for Delivery
-     *                    4 = Delivered
-     */
     public Order(String customerName, String phoneNumber, String orderId,
-                 double amount, String date, String status, int currentStep) {
+                 double sellingPrice, String orderDate, String status, int stepNumber) {
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
         this.orderId = orderId;
-        this.amount = amount;
-        this.date = date;
+        this.sellingPrice = sellingPrice;
+        this.orderDate = orderDate;
         this.status = status;
-        this.currentStep = currentStep;
+        this.stepNumber = stepNumber;
+        this.customerAddress = "123 Main St, Hyderabad, Telangana, 500001"; // Default address
+        this.listPrice = sellingPrice * 1.2; // Default list price calculation
+        this.deliveryAgentPhone = "9999999999"; // Default delivery agent phone
+        this.items = new ArrayList<>();
     }
 
-    // Getters
+    // Getters and setters
     public String getCustomerName() {
         return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public int getCurrentStep() {
-        return currentStep;
-    }
-
-    // Setters
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getOrderId() {
+        return orderId;
     }
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public double getSellingPrice() {
+        return sellingPrice;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setSellingPrice(double sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public void setCurrentStep(int currentStep) {
-        this.currentStep = currentStep;
+    public int getStepNumber() {
+        return stepNumber;
     }
 
-    // Helper method to update both status and currentStep together
-    public void updateOrderStatus(String status, int currentStep) {
-        this.status = status;
-        this.currentStep = currentStep;
+    public void setStepNumber(int stepNumber) {
+        this.stepNumber = stepNumber;
+    }
+
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
+    public double getListPrice() {
+        return listPrice;
+    }
+
+    public void setListPrice(double listPrice) {
+        this.listPrice = listPrice;
+    }
+
+    public String getDeliveryAgentPhone() {
+        return deliveryAgentPhone;
+    }
+
+    public void setDeliveryAgentPhone(String deliveryAgentPhone) {
+        this.deliveryAgentPhone = deliveryAgentPhone;
+    }
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+
+    public void addItem(OrderItem item) {
+        if (this.items == null) {
+            this.items = new ArrayList<>();
+        }
+        this.items.add(item);
     }
 }

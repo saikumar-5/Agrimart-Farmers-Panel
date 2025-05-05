@@ -6,21 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> implements Filterable {
+    private Context context;
     private List<Order> orderList;
     private List<Order> orderListFull;
-    private Context context;
     private OnOrderClickListener listener;
 
-    // Interface for handling item clicks
     public interface OnOrderClickListener {
         void onOrderClick(Order order, int position);
     }
@@ -35,11 +36,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         this.listener = listener;
     }
 
+    public void updateOrderList(List<Order> newOrderList) {
+        this.orderList = newOrderList;
+        this.orderListFull = new ArrayList<>(newOrderList);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.order_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.order_summary_item_layout, parent, false);
         return new OrderViewHolder(view);
     }
 
@@ -47,16 +53,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
 
-        // Set text fields
-        holder.customerName.setText(order.getCustomerName());
-        holder.phoneNumber.setText(order.getPhoneNumber());
-        holder.orderId.setText("Order ID: #" + order.getOrderId());
-        holder.orderAmount.setText("₹ " + String.format("%,.0f", order.getAmount()));
-        holder.orderDate.setText(order.getDate());
-        holder.orderStatus.setText(order.getStatus());
+        // Format the price with rupee symbol
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+        String formattedPrice = format.format(order.getSellingPrice()).replace(".00", "");
 
-        // Update the order progress icons based on currentStep
-        updateOrderProgress(holder, order.getCurrentStep());
+        holder.customerNameTextView.setText(order.getCustomerName());
+        holder.orderIdTextView.setText("Order #" + order.getOrderId());
+        holder.priceTextView.setText(formattedPrice);
+        holder.statusTextView.setText(order.getStatus());
+        holder.dateTextView.setText(order.getOrderDate());
 
         // Set click listener
         holder.itemView.setOnClickListener(v -> {
@@ -64,31 +69,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 listener.onOrderClick(order, position);
             }
         });
-    }
-
-    private void updateOrderProgress(OrderViewHolder holder, int currentStep) {
-        // Get references to all progress icons
-        ImageView[] progressIcons = {
-                holder.confirmedIcon,
-                holder.pickedUpIcon,
-                holder.shippedIcon,
-                holder.outForDeliveryIcon,
-                holder.deliveredIcon
-        };
-
-        // Update background and icon color based on step completion
-        for (int i = 0; i < progressIcons.length; i++) {
-            if (i <= currentStep) {
-                // Set completed step (green circle background)
-                progressIcons[i].setBackground(ContextCompat.getDrawable(context, R.drawable.circle_backgrnd_green));
-                progressIcons[i].setColorFilter(ContextCompat.getColor(context, android.R.color.white));
-            } else {
-                // Set pending step (gray circle background)
-                progressIcons[i].setBackground(ContextCompat.getDrawable(context, R.drawable.crcle_bg));
-                // Fix: Use android.R.color.darker_gray instead of R.color.lightGray which doesn't exist
-                progressIcons[i].setColorFilter(ContextCompat.getColor(context, android.R.color.darker_gray));
-            }
-        }
     }
 
     @Override
@@ -114,7 +94,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 for (Order order : orderListFull) {
                     if (order.getCustomerName().toLowerCase().contains(filterPattern) ||
                             order.getOrderId().toLowerCase().contains(filterPattern) ||
-                            order.getPhoneNumber().contains(filterPattern)) {
+                            order.getStatus().toLowerCase().contains(filterPattern)) {
                         filteredList.add(order);
                     }
                 }
@@ -122,7 +102,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
             FilterResults results = new FilterResults();
             results.values = filteredList;
-
             return results;
         }
 
@@ -134,33 +113,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         }
     };
 
-    public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView customerName, phoneNumber, orderId, orderAmount, orderDate, orderStatus;
-        ImageView confirmedIcon, pickedUpIcon, shippedIcon, outForDeliveryIcon, deliveredIcon;
+    static class OrderViewHolder extends RecyclerView.ViewHolder {
+        TextView customerNameTextView, orderIdTextView, priceTextView, statusTextView, dateTextView;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Text views
-            customerName = itemView.findViewById(R.id.customerName);
-            phoneNumber = itemView.findViewById(R.id.customerPhone);
-            orderId = itemView.findViewById(R.id.orderId);
-            orderAmount = itemView.findViewById(R.id.orderAmounts);
-            orderDate = itemView.findViewById(R.id.orderDate);
-            orderStatus = itemView.findViewById(R.id.orderStatuss);
-
-            // Progress icons
-            confirmedIcon = itemView.findViewById(R.id.confirmedIcons);
-            pickedUpIcon = itemView.findViewById(R.id.pickedUpIcons);
-            shippedIcon = itemView.findViewById(R.id.shippedIcons);
-            outForDeliveryIcon = itemView.findViewById(R.id.outForDeliveryIcons);
-            deliveredIcon = itemView.findViewById(R.id.deliveredIcons);
+            customerNameTextView = itemView.findViewById(R.id.customerNameTextView);
+            orderIdTextView = itemView.findViewById(R.id.orderIdTextView);
+            priceTextView = itemView.findViewById(R.id.priceTextView);
+            statusTextView = itemView.findViewById(R.id.statusTextView);
+            dateTextView = itemView.findViewById(R.id.dateTextView);
         }
-    }
-
-    // Method to update order list
-    public void updateOrderList(List<Order> newOrderList) {
-        this.orderList = newOrderList;
-        this.orderListFull = new ArrayList<>(newOrderList);
-        notifyDataSetChanged();
     }
 }

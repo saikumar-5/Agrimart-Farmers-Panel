@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,21 +65,49 @@ public class CartFragment extends Fragment implements OrderAdapter.OnOrderClickL
     }
 
     private void loadSampleOrders() {
-        // Add active orders (steps 0-3)
-        activeOrderList.add(new Order("Venkata Ramana", "9908947050", "4340",
-                5500, "Fri, 25 Jan", "Confirmed", 0));
-        activeOrderList.add(new Order("John Doe", "1234567890", "4341",
-                6500, "Sat, 26 Jan", "Picked Up", 1));
-        activeOrderList.add(new Order("Mary Johnson", "5556667777", "4343",
-                3200, "Fri, 25 Jan", "Shipped", 2));
-        activeOrderList.add(new Order("Robert Smith", "3334445555", "4344",
-                8900, "Thu, 24 Jan", "Out for Delivery", 3));
+        // Create first active order with items
+        Order order1 = new Order("Venkata Ramana", "9908947050", "4340",
+                5500, "Fri, 25 Jan", "Confirmed", 0);
+        order1.setCustomerAddress("24/42, Eenor Devi Sagar\nDarani, Nellipaka\nPodalakuru mandal\nChittoor - 524366");
+        order1.addItem(new OrderItem("Fresh Tomatoes", 40.0, 2, R.drawable.tomatoes));
+        order1.addItem(new OrderItem("Organic Potatoes", 30.0, 3, R.drawable.tomato_22));
+        activeOrderList.add(order1);
 
-        // Add completed orders (step 4 - delivered)
-        completedOrderList.add(new Order("Jane Smith", "0987654321", "4342",
-                7500, "Sun, 27 Jan", "Delivered", 4));
-        completedOrderList.add(new Order("Emma Wilson", "4443332222", "4345",
-                4200, "Wed, 23 Jan", "Delivered", 4));
+        // Create second active order with items
+        Order order2 = new Order("John Doe", "1234567890", "4341",
+                6500, "Sat, 26 Jan", "Picked Up", 1);
+        order2.addItem(new OrderItem("Green Beans", 60.0, 5, R.drawable.tomato_img));
+        order2.addItem(new OrderItem("Fresh Carrots", 45.0, 2, R.drawable.tomatoes));
+        activeOrderList.add(order2);
+
+        // Create third active order with items
+        Order order3 = new Order("Mary Johnson", "5556667777", "4343",
+                3200, "Fri, 25 Jan", "Shipped", 2);
+        order3.addItem(new OrderItem("Broccoli", 80.0, 1, R.drawable.tomato_22));
+        order3.addItem(new OrderItem("Cauliflower", 70.0, 2, R.drawable.tomatoes));
+        activeOrderList.add(order3);
+
+        // Create fourth active order with items
+        Order order4 = new Order("Robert Smith", "3334445555", "4344",
+                8900, "Thu, 24 Jan", "Out for Delivery", 3);
+        order4.addItem(new OrderItem("Spinach Bundle", 50.0, 3, R.drawable.tomato_img));
+        order4.addItem(new OrderItem("Red Capsicum", 90.0, 1, R.drawable.tomatoes));
+        order4.addItem(new OrderItem("Green Onions", 30.0, 2, R.drawable.tomato_22));
+        activeOrderList.add(order4);
+
+        // Create first completed order with items
+        Order completed1 = new Order("Jane Smith", "0987654321", "4342",
+                7500, "Sun, 27 Jan", "Delivered", 4);
+        completed1.addItem(new OrderItem("Cabbage", 35.0, 2, R.drawable.tomato_img));
+        completed1.addItem(new OrderItem("Eggplant", 40.0, 3, R.drawable.tomatoes));
+        completedOrderList.add(completed1);
+
+        // Create second completed order with items
+        Order completed2 = new Order("Emma Wilson", "4443332222", "4345",
+                4200, "Wed, 23 Jan", "Delivered", 4);
+        completed2.addItem(new OrderItem("Lady's Finger", 55.0, 1, R.drawable.tomato_22));
+        completed2.addItem(new OrderItem("Cucumber", 30.0, 2, R.drawable.tomatoes));
+        completedOrderList.add(completed2);
 
         // Initially show active orders
         orderList.addAll(activeOrderList);
@@ -133,8 +161,13 @@ public class CartFragment extends Fragment implements OrderAdapter.OnOrderClickL
 
     @Override
     public void onOrderClick(Order order, int position) {
-        // Handle order click - e.g., show order details
-        Toast.makeText(getContext(), "Order #" + order.getOrderId() + " clicked", Toast.LENGTH_SHORT).show();
-        // You would typically navigate to an order details screen here
+        // Navigate to OrderDetailsFragment with the selected order
+        OrderDetailsFragment orderDetailsFragment = OrderDetailsFragment.newInstance(order);
+
+        // Use FragmentTransaction to replace current fragment with details fragment
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, orderDetailsFragment);
+        transaction.addToBackStack(null);  // Add to back stack so user can navigate back
+        transaction.commit();
     }
 }
